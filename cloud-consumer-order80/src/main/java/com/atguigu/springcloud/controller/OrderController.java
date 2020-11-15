@@ -22,7 +22,8 @@ import javax.annotation.Resource;
 @Slf4j // 等同于 private  final Logger logger = LoggerFactory.getLogger
 public class OrderController {
 
-    public static final String PAYMENT_URL ="http://localhost:8001";
+    //public static final String PAYMENT_URL ="http://localhost:8001";
+    public static final String PAYMENT_URL ="http://CLOUD-PAYMENT-SERVICE"; // 根据微服务的名字去加载
     @Resource
     private RestTemplate restTemplate;
 
@@ -30,12 +31,12 @@ public class OrderController {
     public CommonResult<Payment> create(Payment payment){
         // 地址参数 返回值
         log.info("发送添加请求");
-        return restTemplate.postForObject(PAYMENT_URL+"payment/create",payment, CommonResult.class);
+        return restTemplate.postForObject(PAYMENT_URL+"/payment/create",payment, CommonResult.class);
     }
 
     @GetMapping("consumer/payment/get/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id){
-        return restTemplate.getForObject(PAYMENT_URL+"payment/get/"+id,CommonResult.class);
+        return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,CommonResult.class);
     }
 
 }

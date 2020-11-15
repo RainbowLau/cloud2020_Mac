@@ -20,4 +20,16 @@ eureka:
     # 是否将自己注册到 EurekaServer 默认为true
     fetch-registry: true
     service-url:
+      # 单机版
       defaultZone: http://localhost:7001/eureka
+      # defaultZone: http://eureka7002.com:7002/eureka,http://eureka7001.com:7001/eureka
+  instance:
+    # 显示服务名字，而不是主机
+    instance-id: payment8001
+    # 访问路径显示Ip
+    prefer-ip-address: true
+    # 7001 和 8001 配置了 关闭时常和心跳间隔， 原因： 自我保护机制
+    # Eureka 客户端向服务端发送心跳的时间间隔，单位为秒（默认30s)
+    lease-renewal-interval-in-seconds: 1
+    # Eureka 服务端在收到最后一次心跳后，等待时间上限，默认是（90s）,超时删除改服务
+    lease-expiration-duration-in-seconds: 2
